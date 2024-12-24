@@ -12,7 +12,7 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
-        if not value.isdigit() or len(value) != 10:
+        if not value.isdigit() and len(value) != 10:
             raise ValueError("Phone number must be 10 digits")
         super().__init__(value)
 
@@ -24,7 +24,7 @@ class Record:
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
 
-    def delete_phone(self, phone):
+    def remove_phone(self, phone):
         for p in self.phones:
             if p.value == phone:
                 self.phones.remove(p)

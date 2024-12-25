@@ -12,7 +12,7 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
-        if not value.isdigit() and len(value) != 10:
+        if not value.isdigit() or len(value) != 10:
             raise ValueError("Phone number must be 10 digits")
         super().__init__(value)
 
@@ -34,8 +34,9 @@ class Record:
     def edit_phone(self, old_phone, new_phone):
         for p in self.phones:
             if p.value == old_phone:
-                p.value = new_phone
-                return
+                if(Phone(new_phone)):
+                    p.value = new_phone
+                    return
         raise ValueError("Phone number not found")
 
     def find_phone(self, phone):
